@@ -1,0 +1,9 @@
+variable "aws_region" {
+  description = "AWS region to deploy the EC2 instance"
+  default     = "us-east-1"
+}
+
+variable "key_name" {
+  description = "EC2 key pair name for SSH access"
+  type        = string
+}

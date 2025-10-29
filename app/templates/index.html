@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Smart Notes App</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 Smart Notes</h1>
+
+    <form method="POST" action="/" class="note-form">
+      <textarea name="note" placeholder="Write your note..." required></textarea>
+      <select name="tag">
+        <option value="General">General</option>
+        <option value="Personal">Personal</option>
+        <option value="Work">Work</option>
+        <option value="Important">Important</option>
+      </select>
+      <button type="submit">Add Note</button>
+    </form>
+
+    <form method="GET" action="/" class="search-bar">
+      <input type="text" name="search" placeholder="🔍 Search notes..." value="{{ search }}">
+      <button type="submit">Search</button>
+    </form>
+
+    <div class="notes">
+      {% for id, content, tag, created_at in notes %}
+      <div class="note">
+        <div>
+          <div class="meta">{{ created_at }} — <span class="tag">{{ tag }}</span></div>
+          <div class="content">{{ content }}</div>
+        </div>
+        <form method="POST" action="/delete/{{ id }}">
+          <button class="delete">🗑</button>
+        </form>
+      </div>
+      {% else %}
+      <p class="empty">No notes found. Add or search again!</p>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>
